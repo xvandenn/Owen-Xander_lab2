@@ -107,8 +107,15 @@ hash_list::hash_list(const hash_list &other)
 }
 
 hash_list &hash_list::operator=(const hash_list &other) { 
-	other.~hash_list();
-	this(other)
+	this->~hash_list();
+	head = NULL;
+	size = 0;
+	node * ptr = other.head;
+	while(ptr != NULL)
+	{
+		this->insert(ptr->key, ptr->value);
+		ptr = ptr -> next;
+	}
 	return *this; 
 }
 
@@ -137,9 +144,9 @@ std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() {
 }
 
 
-// bool hash_list::iter_at_end() { 
-// 	return iter_ptr == NULL ? true : false;
-// }
+bool hash_list::iter_at_end() { 
+	return iter_ptr == NULL ? true : false;
+}
 /**-----------------------------------------------------------------------------------
  * END Part 2
  *------------------------------------------------------------------------------------*/
