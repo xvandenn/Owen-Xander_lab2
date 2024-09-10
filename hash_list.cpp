@@ -12,7 +12,7 @@ hash_list::hash_list() {
 
 void hash_list::insert(int key, float value) {
 	node* start = head;
-
+	
 	while(start != nullptr){
 		if(start->key == key){
 			start->value = value;
@@ -94,36 +94,46 @@ hash_list::~hash_list() {
  * START Part 2
  *------------------------------------------------------------------------------------*/
 
-hash_list::hash_list(const hash_list &other) {}
+hash_list::hash_list(const hash_list &other) 
+{
+	head = NULL;
+	size = 0;
+	node * ptr = other.head;
+	while(ptr != NULL)
+	{
+		this->insert(ptr->key, ptr->value);
+		ptr = ptr -> next;
+	}
+}
 
 hash_list &hash_list::operator=(const hash_list &other) { return *this; }
 
 void hash_list::reset_iter() {}
 
 
-void hash_list::increment_iter() {
-	if(iter_ptr == NULL){
-		return;
-	}
-	if(next == NULL){
-		iter_ptr = NULL;
-		return;
-	}
-	iter_ptr = next;
-}
+// void hash_list::increment_iter() {
+// 	if(iter_ptr == NULL){
+// 		return;
+// 	}
+// 	if(next == NULL){
+// 		iter_ptr = NULL;
+// 		return;
+// 	}
+// 	iter_ptr = next;
+// }
 
 
-std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() { 
-	if(iter_ptr == NULL){
-	return std::nullopt;
-	}
-	return std::make_pair(&key, &value);
-}
+// std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() { 
+// 	if(iter_ptr == NULL){
+// 	return std::nullopt;
+// 	}
+// 	return std::make_pair(&key, &value);
+// }
 
 
-bool hash_list::iter_at_end() { 
-	return iter_ptr == NULL ? true : false;
-}
+// bool hash_list::iter_at_end() { 
+// 	return iter_ptr == NULL ? true : false;
+// }
 /**-----------------------------------------------------------------------------------
  * END Part 2
  *------------------------------------------------------------------------------------*/
