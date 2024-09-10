@@ -101,13 +101,29 @@ hash_list &hash_list::operator=(const hash_list &other) { return *this; }
 void hash_list::reset_iter() {}
 
 
-void hash_list::increment_iter() {}
+void hash_list::increment_iter() {
+	if(iter_ptr == NULL){
+		return;
+	}
+	if(next == NULL){
+		iter_ptr = NULL;
+		return;
+	}
+	iter_ptr = next;
+}
 
 
-std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() { return std::nullopt; }
+std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() { 
+	if(iter_ptr == NULL){
+	return std::nullopt;
+	}
+	return std::make_pair(&key, &value);
+}
 
 
-bool hash_list::iter_at_end() { return false; }
+bool hash_list::iter_at_end() { 
+	return iter_ptr == NULL ? true : false;
+}
 /**-----------------------------------------------------------------------------------
  * END Part 2
  *------------------------------------------------------------------------------------*/
