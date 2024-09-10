@@ -107,11 +107,11 @@ void hash_list::increment_iter() {
 	if(iter_ptr == NULL){
 		return;
 	}
-	if(next == NULL){
+	if(iter_ptr->next == NULL){
 		iter_ptr = NULL;
 		return;
 	}
-	iter_ptr = next;
+	iter_ptr = iter_ptr->next;
 }
 
 
@@ -119,7 +119,7 @@ std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() {
 	if(iter_ptr == NULL){
 	return std::nullopt;
 	}
-	return std::make_pair(&key, &value);
+	return std::make_pair(&iter_ptr->key, &iter_ptr->value);
 }
 
 
