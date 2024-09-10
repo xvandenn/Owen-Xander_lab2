@@ -98,7 +98,9 @@ hash_list::hash_list(const hash_list &other) {}
 
 hash_list &hash_list::operator=(const hash_list &other) { return *this; }
 
-void hash_list::reset_iter() {}
+void hash_list::reset_iter() {
+	iter_ptr = size > 0 ? head : NULL;
+}
 
 
 void hash_list::increment_iter() {
