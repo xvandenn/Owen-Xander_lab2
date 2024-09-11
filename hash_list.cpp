@@ -1,5 +1,5 @@
 #include "hash_list.h"
-#include <iostream>
+
 hash_list::hash_list() 
 {
     head = NULL;
@@ -132,25 +132,11 @@ hash_list::hash_list(const hash_list &other)
 {
 	head = NULL;
 	size = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	iter_ptr = other.head;
 	while(!this->iter_at_end())
 	{
 		this->insert(iter_ptr->key, iter_ptr->value);
 		this->increment_iter();
-=======
-=======
->>>>>>> 81db6ab (finished coppier)
-	node * ptr = other.head;
-	while(ptr != NULL)
-	{
-		this->insert(ptr->key, ptr->value);
-		ptr = ptr -> next;
-<<<<<<< HEAD
->>>>>>> 81db6ab (finished coppier)
-=======
->>>>>>> 81db6ab (finished coppier)
 	}
 }
 
@@ -172,8 +158,6 @@ void hash_list::reset_iter() {
 }
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 void hash_list::increment_iter() {
 	if(iter_ptr == NULL){
 		return;
@@ -192,53 +176,11 @@ std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() {
 	}
 	return std::make_pair(&iter_ptr->key, &iter_ptr->value);
 }
-=======
-// void hash_list::increment_iter() {
-// 	if(iter_ptr == NULL){
-// 		return;
-// 	}
-// 	if(next == NULL){
-// 		iter_ptr = NULL;
-// 		return;
-// 	}
-// 	iter_ptr = next;
-// }
 
 
-// std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() { 
-// 	if(iter_ptr == NULL){
-// 	return std::nullopt;
-// 	}
-// 	return std::make_pair(&key, &value);
-// }
->>>>>>> 81db6ab (finished coppier)
-
-
-=======
-// void hash_list::increment_iter() {
-// 	if(iter_ptr == NULL){
-// 		return;
-// 	}
-// 	if(next == NULL){
-// 		iter_ptr = NULL;
-// 		return;
-// 	}
-// 	iter_ptr = next;
-// }
-
-
-// std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() { 
-// 	if(iter_ptr == NULL){
-// 	return std::nullopt;
-// 	}
-// 	return std::make_pair(&key, &value);
-// }
-
-
->>>>>>> 81db6ab (finished coppier)
-// bool hash_list::iter_at_end() { 
-// 	return iter_ptr == NULL ? true : false;
-// }
+bool hash_list::iter_at_end() { 
+	return iter_ptr == NULL ? true : false;
+}
 /**-----------------------------------------------------------------------------------
  * END Part 2
  *------------------------------------------------------------------------------------*/
