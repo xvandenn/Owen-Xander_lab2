@@ -1,88 +1,122 @@
 #include "hash_list.h"
-
-hash_list::hash_list() {
-
-	head = NULL;
-	size = 0;
+#include <iostream>
+hash_list::hash_list() 
+{
+    head = NULL;
+    size = 0;
 }
 
 /**-----------------------------------------------------------------------------------
  * START Part 1
  *------------------------------------------------------------------------------------*/
 
-void hash_list::insert(int key, float value) {
-	node* start = head;
-	
-	while(start != nullptr){
-		if(start->key == key){
-			start->value = value;
-			return;
-		}
-		start = start->next;
-	}
+void hash_list::insert(int key, float value) 
+{
+    node * curr;
+    if (!head)
+    {
+        head = build_node(key, value);
+        size += 1;
+        return;
+    }
 
-	node* toIns = new node;
-	toIns->key = key;
-	toIns->value = value;
-	toIns->next = head;
-	head = toIns;
-	delete start;
+    curr = head;
+    while(curr)
+    {
+        if(curr -> key == key)
+        {
+            curr -> value = value;
+            return;
+        }
+        curr = curr -> next;
+    }
+
+    curr = build_node(key, value);
+    curr -> next = head;
+    head = curr;
+    size += 1;
 }
 
-std::optional<float> hash_list::get_value(int key) const { 
+std::optional<float> hash_list::get_value(int key) const 
+{
+    if(!head)
+    {
+        return std::nullopt;
+    }
 
-	node* start = head;	
-	while(start != nullptr){
-		if((start->key == key)){
-			return start->value;
-		}
-		start = start->next;
-	}
+    node * curr = head;
+    while(curr)
+    {
+        if(curr -> key == key)
+        {
+            return curr -> value;
+        }
+        curr = curr -> next;
+    }
+    return std::nullopt; 
+}
 
-	delete start;
-	return std::nullopt; }
+bool hash_list::remove(int key) 
+{ 
+    node * temp;
+    node * curr;
+    if(!head)
+    {
+        return false;
+    }
 
-bool hash_list::remove(int key) {
+    if(head -> key == key)
+    {
+        temp = head -> next;
+        delete head;
+        head = temp;
+        size -= 1;
+        return true;
+    }
 
-	node* start = head;
-	node* prev = nullptr;
+    curr = head;
+    while(curr -> next)
+    {
+        if((curr -> next) -> key == key)
+        {
+            temp = (curr -> next) -> next;
+            delete curr -> next;
+            curr -> next = temp;
+            size -= 1;
+            return true;
+        }
+        curr = curr -> next;
+    }
+    return false; 
+}
 
-	while(start != nullptr){
-		if(start->key == key){
-			if(prev == nullptr){
-				head = start->next;
-			}
-			else {
-				prev->next = start->next;
-			}
-			delete start;
-			return true;
-		}
+size_t hash_list::get_size() const { return size; }
 
-		prev = start;
-		start = start->next;
-	}
+hash_list::~hash_list() 
+{
+    if(!head)
+    {
+        return;
+    }
+    node * temp;
+    while (head)
+    {
+        temp = head -> next;
+        delete head;
+        head = temp;
+    }
+}
 
-	return false; }
+//personal helper functions below:
 
-size_t hash_list::get_size() const { 
+node * hash_list::build_node(int key, float value)
+{
+    node * temp = new node;
+    temp -> next = NULL;
+    temp -> key = key;
+    temp -> value = value;
 
-	size_t size = 0;
-	node* start = head;
-	while(start != nullptr){
-		size++;
-		start = start->next;
-	}
-	delete start;
-	return size; }
-
-hash_list::~hash_list() {
-	node* start = head;
-	while(start != nullptr){
-		node* next = start->next;
-		delete start;
-		start = next;
-	}
+    return temp;
 }
 
 /**-----------------------------------------------------------------------------------
@@ -98,11 +132,19 @@ hash_list::hash_list(const hash_list &other)
 {
 	head = NULL;
 	size = 0;
+<<<<<<< HEAD
 	iter_ptr = other.head;
 	while(!this->iter_at_end())
 	{
 		this->insert(iter_ptr->key, iter_ptr->value);
 		this->increment_iter();
+=======
+	node * ptr = other.head;
+	while(ptr != NULL)
+	{
+		this->insert(ptr->key, ptr->value);
+		ptr = ptr -> next;
+>>>>>>> 81db6ab (finished coppier)
 	}
 }
 
@@ -124,6 +166,7 @@ void hash_list::reset_iter() {
 }
 
 
+<<<<<<< HEAD
 void hash_list::increment_iter() {
 	if(iter_ptr == NULL){
 		return;
@@ -142,11 +185,31 @@ std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() {
 	}
 	return std::make_pair(&iter_ptr->key, &iter_ptr->value);
 }
+=======
+// void hash_list::increment_iter() {
+// 	if(iter_ptr == NULL){
+// 		return;
+// 	}
+// 	if(next == NULL){
+// 		iter_ptr = NULL;
+// 		return;
+// 	}
+// 	iter_ptr = next;
+// }
 
 
-bool hash_list::iter_at_end() { 
-	return iter_ptr == NULL ? true : false;
-}
+// std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() { 
+// 	if(iter_ptr == NULL){
+// 	return std::nullopt;
+// 	}
+// 	return std::make_pair(&key, &value);
+// }
+>>>>>>> 81db6ab (finished coppier)
+
+
+// bool hash_list::iter_at_end() { 
+// 	return iter_ptr == NULL ? true : false;
+// }
 /**-----------------------------------------------------------------------------------
  * END Part 2
  *------------------------------------------------------------------------------------*/

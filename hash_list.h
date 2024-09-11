@@ -84,6 +84,18 @@ public:
      */
     ~hash_list();
 
+    /**
+     * @brief Build a new list node with given params and a
+     * Null pointer in the "next" field
+     *
+     * @param key, value
+     *  The key to be added to the list and its
+     *  corresponding value
+     *
+     * @return
+     *  pointer to the new node
+     * */
+    node * build_node(int key, float value);
 
     /**-----------------------------------------------------------------------------------
      * END Part 1
