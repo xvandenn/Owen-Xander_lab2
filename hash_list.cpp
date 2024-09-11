@@ -150,7 +150,7 @@ hash_list &hash_list::operator=(const hash_list &other) {
 		this->insert(ptr->key, ptr->value);
 		ptr = ptr -> next;
 	}
-	*iter_ptr = *(other.iter_ptr);
+	&iter_ptr = &(other.iter_ptr);
 	return *this; 
 }
 
