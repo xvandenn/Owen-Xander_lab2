@@ -145,11 +145,11 @@ hash_list &hash_list::operator=(const hash_list &other) {
 	this->~hash_list();
 	head = NULL;
 	size = 0;
-	node * ptr = other.head;
-	while(ptr != NULL)
+	iter_ptr = other.head;
+	while(!this->iter_at_end())
 	{
-		this->insert(ptr->key, ptr->value);
-		ptr = ptr -> next;
+		this->insert(iter_ptr->key, iter_ptr->value);
+		this->increment_iter();
 	}
 	this->reset_iter();
 	return *this; 
