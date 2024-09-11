@@ -139,14 +139,6 @@ hash_list::hash_list(const hash_list &other)
 		this->increment_iter();
 	}
 	this->reset_iter();
-	if(other.iter_ptr)
-	{
-		iter_ptr = head;
-		while(iter_ptr != other.iter_ptr)
-		{
-			this->increment_iter();
-		}
-	}
 }
 
 hash_list &hash_list::operator=(const hash_list &other) { 
@@ -160,14 +152,6 @@ hash_list &hash_list::operator=(const hash_list &other) {
 		ptr = ptr -> next;
 	}
 	this->reset_iter();
-	if(other.iter_ptr)
-	{
-		iter_ptr = head;
-		while(iter_ptr != other.iter_ptr)
-		{
-			this->increment_iter();
-		}
-	}
 	return *this; 
 }
 
