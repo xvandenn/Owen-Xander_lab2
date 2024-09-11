@@ -138,18 +138,37 @@ hash_list::hash_list(const hash_list &other)
 		this->insert(iter_ptr->key, iter_ptr->value);
 		this->increment_iter();
 	}
+	reset_iter();
+	iter_ptr = head;
+	if(!other.iter_at_end())
+	{
+		while(iter_ptr -> key != (other.iter_ptr)->key)
+		{
+			increment_iter();
+		}
+	}
 }
 
 hash_list &hash_list::operator=(const hash_list &other) { 
 	this->~hash_list();
 	head = NULL;
 	size = 0;
+	reset_iter();
 	node * ptr = other.head;
 	while(ptr != NULL)
 	{
 		this->insert(ptr->key, ptr->value);
 		ptr = ptr -> next;
 	}
+	iter_ptr = head;
+	if(!other.iter_at_end())
+	{
+		while(iter_ptr -> key != (other.iter_ptr)->key)
+		{
+			increment_iter();
+		}
+	}
+	
 	return *this; 
 }
 
