@@ -141,7 +141,11 @@ hash_list::hash_list(const hash_list &other)
 	this->reset_iter();
 }
 
-hash_list &hash_list::operator=(const hash_list &other) { 
+hash_list &hash_list::operator=(const hash_list &other) {
+	if(head == other.head)
+	{
+		return *this;
+	}
 	this->~hash_list();
 	head = NULL;
 	size = 0;
